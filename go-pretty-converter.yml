@@ -1,0 +1,21 @@
+# go-pretty-converter configuration
+# https://github.com/sazardev/go-pretty-converter
+#
+# Documents are ordered by their [X.Y.Z] frontmatter id, not by filename,
+# so the numbering in the frontmatter is the real table of contents.
+
+source: ./book
+out: ./out/english-from-zero-to-fluent
+theme: academic
+language: en
+density: relaxed
+
+title: "English: From Zero to Fluent"
+subtitle: "A complete, planned course in one volume"
+author: "English from Zero to Fluent"
+
+# 6x9 is the trim size print-on-demand services expect.
+paper: 6x9in
+
+# Every build runs the audit. Warnings are advisory unless --strict is
+# passed, so CI passes --strict and a regression fails the job.

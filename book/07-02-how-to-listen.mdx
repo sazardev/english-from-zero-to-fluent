@@ -1,0 +1,189 @@
+---
+id: "[7.2.0]"
+title: How to Listen
+tags: [listening, method, strategy]
+---
+
+# How to listen
+
+Reading and listening are separate systems. Twenty minutes a day of
+reading will improve your reading and leave your listening exactly where
+it was, because your ear has not been trained at all.
+
+This is the most common gap in self-study, and it is the one that most
+people give up on, because listening feels impossible. It is not
+impossible. It is a technique problem, not a talent problem.
+
+## The three passes
+
+<Warning>
+One listening attempt is always a failure. You will understand about
+sixty per cent and it will feel like forty. This is normal and it is why
+the material has to be used three times.
+</Warning>
+
+| pass | subtitles | what your brain does | what you get |
+|---|---|---|---|
+| 1 | none | you decode from sound alone | the gist, maybe 50% |
+| 2 | English, on time | you confirm what you heard | 80 to 90% |
+| 3 | English, **delayed 0.4s** | you produce the word yourself | real listening |
+
+Most people stop after pass one, conclude they have a bad ear, and never
+find out that pass three is where it happens.
+
+## The delayed subtitle, and why it works
+
+This is the single most useful listening technique and almost nobody
+knows about it.
+
+When subtitles are on time, you are reading with an audio track attached.
+The eye does the work and the ear confirms.
+
+When subtitles are four tenths of a second behind, there is a gap. The
+word arrives, the subtitle has not. In that gap your brain has to produce
+the word itself, and that production is the skill you are trying to build.
+
+<DeepDive>
+The reason it works is that recognition and production are different
+operations, and subtitles on time only train recognition. Reading a
+subtitle confirms the sound without ever generating it, so you can sit
+through an hour of English and produce nothing at all.
+<br><br>
+The delay forces generation. It is uncomfortable, and the discomfort is
+the signal that you are working at the right difficulty.
+</DeepDive>
+
+## Playing it
+
+```bash
+# 1. no subtitles
+mpv --no-sub video.mkv
+
+# 2. subtitles on time
+mpv --sub-file=video.srt video.mkv
+
+# 3. subtitles late, the real work
+mpv --sub-file=video.srt --sub-delay=-0.4 video.mkv
+```
+
+Negative delay puts the subtitle in the future relative to the audio, so
+it appears after the word is spoken. Four tenths of a second is the
+usual starting point; if that feels easy, go to `-0.6`, and if it feels
+impossible, drop to `-0.2`.
+
+## Choosing material
+
+| level | what to use | why |
+|---|---|---|
+| A2 | very short, slow, clear, familiar topic | you need the words to be nearly all known |
+| B1 | a talk with a clear single speaker | 10 minutes is enough |
+| B2 | a talk, a documentary, a drama series | variety of voice starts to matter |
+| C1 | an audiobook, a lecture, a news programme | dense information, native speed |
+| C2 | literature read aloud, a debate | speed and inference |
+
+<Warning>
+Do not use a film or series you have already seen in your own language.
+It feels easier because you understand the plot, and the plot is not
+English. You are being carried by a language you already have, and you
+are not training the one you want.
+</Warning>
+
+## The graded ladder
+
+Once a text is comfortable at 0.4 seconds, make it harder. Change one
+thing at a time.
+
+1. increase the delay: 0.4, 0.6, 0.8 seconds
+2. remove the subtitles entirely
+3. add background noise: a café, a bus
+4. raise the speed to 1.1x, then 1.25x
+5. choose something harder
+
+Doing all five at once is the reason people plateau. The signal that you
+are ready to advance is simple: **the delay stops feeling hard.**
+
+## Listening to the unlistenable
+
+At B2 and above you will hit material you cannot follow, and there are
+three things worth knowing.
+
+### The two-layer approach
+
+One layer is comprehensible, one is not. Speak at a normal speed and you
+will follow maybe seventy per cent, and that seventy per cent is enough
+to keep going.
+
+> The committee will presumably recommend that we **defer** the decision
+> until the **revised** figures are available, which is frankly
+> **disgraceful** after this much delay.
+
+You need *defer*, *revised* and *disgraceful*. You can follow the
+argument without them: something is being put off, the numbers changed,
+and someone is angry about it. That is the content. The three words are
+the content's clothing.
+
+### The second-listen rule
+
+<DeepDive>
+Never look up a word while the audio is running. Stop it, write the word
+down, and continue without it.
+<br><br>
+Looking up mid-stream breaks the flow, and the flow is what carries the
+listening. The word will still be there in ten minutes. What you lose by
+stopping is the twenty seconds of context that would have made the word
+guessable anyway.
+</DeepDive>
+
+### Numbers and names
+
+The first two minutes of almost any news item are numbers, dates, names
+and places, and they are unlistenable. Let them go.
+
+> *...on the fourteenth of March, in Kigali, Dr. Amara Okonkwo told
+> reporters that...*
+
+You lost forty seconds. You did not lose the story, and you will not
+miss the story. Write `[names/numbers]` in your notes and move on.
+
+## Shadowing
+
+<DeepDive>
+Shadowing is repeating aloud, in real time, a few seconds behind the
+speaker. It is the most intense thing in this book and it should be the
+last thing you add.
+<br><br>
+It works because it forces three things at once: you must hear the word,
+you must produce it, and you must produce it fast enough to stay in sync.
+The sync is the point. You are not reciting, you are keeping up with a
+native speaker, and the gap between your fluency and that is exactly what
+you feel.
+<br><br>
+Fifteen minutes, three times a week, on a passage you have already
+listened to twice. If you cannot stay in sync, slow the audio to 0.9x
+and build up.
+</DeepDive>
+
+## A twenty-minute listening session
+
+| minutes | what |
+|---|---|
+| 0 to 8 | pass 1, no subtitles, gist only |
+| 8 to 14 | pass 2, English subtitles on time, note the gaps |
+| 14 to 20 | pass 3, subtitles at `-0.4`, repeat the gaps aloud |
+
+Twenty minutes, three passes, one text. That is the whole method, and
+doing it on five texts is worth more than doing pass one on fifty.
+
+## What you should be able to do by C1
+
+| skill | test |
+|---|---|
+| follow an argument in a talk | can you say what the speaker concluded? |
+| follow a news item | can you say the headline without reading? |
+| follow fiction | can you say what just happened? |
+| follow a lecture | can you write three bullet points from it? |
+| infer unknown words | can you say what a new word probably means? |
+
+That last row is the one that marks real progress. When you start
+guessing meaning from sound the way you already guess it from context, the
+listening barrier has been crossed.

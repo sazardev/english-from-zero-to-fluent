@@ -1,0 +1,82 @@
+---
+id: "[10.3.0]"
+title: Which Rule Applies
+---
+
+# Which rule applies
+
+The skill is not knowing the six rules. It is deciding, in one second,
+which one fires on a verb you have never seen before.
+
+## The decision table
+
+| verb | rule | why |
+|---|---|---|
+| work | **R1** | plain |
+| want | **R1** | plain |
+| open | **R1** | plain |
+| watch | **R1** | ends in ch, so the third person is watches |
+| live | **R2** | ends in -e |
+| dance | **R2** | ends in -e |
+| hate | **R2** | ends in -e |
+| study | **R3** | consonant + y |
+| cry | **R3** | consonant + y |
+| apply | **R3** | consonant + y |
+| enjoy | **R4** | vowel + y, keep the y |
+| stay | **R4** | vowel + y |
+| play | **R4** | vowel + y |
+| stop | **R5** | stressed CVC, double the p |
+| plan | **R5** | stressed CVC, double the n |
+| admit | **R5** | stressed CVC, double the t |
+| prefer | **R5** | stressed CVC, double the r |
+| travel | **R5** | stressed CVC, double the l |
+| like | **R6** | CVC but ends in -e, no doubling |
+| change | **R6** | CVC but ends in -e, no doubling |
+| use | **R6** | ends in -e, no doubling |
+| dive | **R6** | short vowel and -e, no doubling |
+
+## The procedure, in order
+
+<DeepDive>
+1. **Does it end in -e?** Then no doubling at all. Use R2. This settles
+   *like*, *change*, *use*, *dive*, *come*, *dive*, *sense*.
+2. **Does it end in consonant + y?** Then *y* becomes *ied*. R3, and R5
+   never applies. This settles *study*, *cry*, *apply*, *hurry*.
+3. **Is it a stressed consonant-vowel-consonant?** Then double. R5. This
+   settles *stop*, *plan*, *admit*, *prefer*, *travel*.
+4. **Does it end in -e?** (it does not, or you would have stopped at 1)
+   Drop the *e*. R2.
+5. **Anything else.** Just add *-ed*. R1. This settles *work*, *want*,
+   *open*, *watch*, *ask*.
+</DeepDive>
+
+## Why the order is not optional
+
+*Travel* looks exactly like *stop*: consonant, vowel, consonant. It is
+R5, so *travelled*. But it does not end in *-e*, so step 1 does not fire.
+
+*Study* also looks like *stop*. But it ends in *-y* after a consonant, so
+step 2 fires and R5 never gets a chance. The result is *studied*, not
+*studyed*.
+
+*Like* also looks like *stop*, but it ends in *-e*, so step 1 fires and
+R5 is excluded. The result is *liked*, not *likked*.
+
+Three verbs, one shape, three different rules. The shape does not
+determine the rule; the ending does, and the order is what resolves it.
+
+## British and American
+
+Some verbs double in British English and not in American English. Both
+are correct.
+
+| British | American |
+|---|---|
+| travelled | traveled |
+| cancelling | canceling |
+| labelled | labeled |
+| jewellery | jewelry |
+| colour | color |
+
+Pick one and stay consistent. Mixing them within one document is the
+only real mistake.

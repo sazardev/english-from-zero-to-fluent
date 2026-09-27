@@ -1,0 +1,16 @@
+# build output
+*.pdf
+*.epub
+*.mobi
+*.azw3
+/out/
+/build/
+
+# tooling
+pretty-converter
+node_modules/
+
+# keep the site's own html
+!book/**/*.html
+
+.DS_Store
