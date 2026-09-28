@@ -52,6 +52,13 @@ def fix(path):
         for t in reversed(stack):
             out.insert(idx + 1, f"</{t}>")
             fixed += 1
+    else:
+        # a closing tag left over at the end of the file is a slip in the
+        # other direction, and it is always the last line
+        while out and out[-1].strip() in (f"</{t}>" for t in TAGS):
+            print(f"  {p.name}: dropping leftover {out[-1].strip()}", file=sys.stderr)
+            out.pop()
+            fixed += 1
 
     p.write_text("\n".join(out), encoding="utf-8")
     print(f"  {p.name}: {fixed} tag(s) rebalanced")
