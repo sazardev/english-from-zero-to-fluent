@@ -270,8 +270,8 @@ This is the most common error for a Spanish speaker, because Spanish
 does not make this distinction.
 </DeepDive>
 """
-    (out / "08-01-twelve-tenses.mdx").write_text(
-        doc("8.1.0", "The Twelve Tenses, Complete", body, tags=["grammar", "tenses"]), encoding="utf-8")
+    (out / "02-06-twelve-tenses.mdx").write_text(
+        doc("2.6.0", "The Twelve Tenses, Complete", body, tags=["grammar", "tenses"]), encoding="utf-8")
 
     # ------------------------------------------------------------- modals
     rows = "\n".join(f"| **{m}** | {meaning} | {f} | {ex} | {nt} |"
@@ -330,8 +330,8 @@ And <i>mustn't</i> forbids: <i>You mustn't smoke here</i>. While
 > He must have forgotten.  *(he did, and we only know now)*
 > He can't have left.  *(he did not, definitely)*
 """
-    (out / "08-02-modals.mdx").write_text(
-        doc("8.2.0", "Modals, Complete", body, tags=["grammar", "modals"]), encoding="utf-8")
+    (out / "02-07-modals.mdx").write_text(
+        doc("2.7.0", "Modals, Complete", body, tags=["grammar", "modals"]), encoding="utf-8")
 
     # ------------------------------------------------------- conditionals
     rows = "\n".join(f"| **{n}** | {u} | {f} | {e} | {qq} |"
@@ -387,8 +387,8 @@ Ask two questions.
 it.* And *when* cannot introduce a duration the way *while* does.
 </DeepDive>
 """
-    (out / "08-03-conditionals.mdx").write_text(
-        doc("8.3.0", "Conditionals, Complete", body, tags=["grammar", "conditionals"]), encoding="utf-8")
+    (out / "02-08-conditionals.mdx").write_text(
+        doc("2.8.0", "Conditionals, Complete", body, tags=["grammar", "conditionals"]), encoding="utf-8")
 
     # ----------------------------------------------------- clause types
     rows = "\n".join(f"| {n} | {w} | {e} |" for n, w, e in CLAUSES)
@@ -444,8 +444,8 @@ Two complete sentences cannot be joined with only a comma.
 A comma splice is only acceptable before *which*, *and that*, or when the
 second half is a participle phrase: *The test was hard, **passing** easily.*
 """
-    (out / "08-04-clauses.mdx").write_text(
-        doc("8.4.0", "Clause Types, Complete", body, tags=["grammar", "clauses"]), encoding="utf-8")
+    (out / "02-09-clauses.mdx").write_text(
+        doc("2.9.0", "Clause Types, Complete", body, tags=["grammar", "clauses"]), encoding="utf-8")
 
     # ------------------------------------------------------- determiners
     rows = "\n".join(f"| {n} | {w} | {e} | {nt} |" for n, w, e, nt in DETERMINERS)
@@ -504,12 +504,12 @@ English drops the article in cases where Spanish keeps one.
 
 *Spain, France* and *Britain* take no article. *the USA* and *the Alps* do.
 """
-    (out / "08-05-determiners.mdx").write_text(
-        doc("8.5.0", "Determiners and Quantifiers, Complete", body, tags=["grammar", "determiners"]),
+    (out / "04-01-determiners.mdx").write_text(
+        doc("4.1.0", "Determiners and Quantifiers, Complete", body, tags=["grammar", "determiners"]),
         encoding="utf-8")
 
-    for f in ("08-01-twelve-tenses", "08-02-modals", "08-03-conditionals",
-              "08-04-clauses", "08-05-determiners"):
+    for f in ("02-06-twelve-tenses", "02-07-modals", "02-08-conditionals",
+              "02-09-clauses", "04-01-determiners"):
         p = out / f"{f}.mdx"
         if p.exists():
             print(f"  {len(p.read_text().split()):6,} words  {p.name}")
