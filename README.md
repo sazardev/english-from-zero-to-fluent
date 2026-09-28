@@ -1,6 +1,6 @@
 # English: From Zero to Fluent
 
-A complete English course in one volume. **1,004 pages**, English only,
+A complete English course in one volume. **1,126 pages**, English only,
 built from material that has already been tested.
 
 Built with
@@ -17,20 +17,27 @@ The built book is in the [releases](../../releases), as PDF and EPUB.
 
 ## What is in it
 
-84 documents, 178,067 words in the rendered PDF.
+113 documents, 205,108 words in the rendered PDF.
 
 | part | documents | words | what |
 |---|---|---|---|
-| 0 Front matter | 2 | 2,036 | how to use the book, the method |
-| 1 Foundations | 6 | 7,586 | what English is, the sentence, articles, pronouns, prepositions of place and time |
+| 0 Front matter | 4 | 4,362 | how to use the book, the method, your tools, the levels |
+| 1 Foundations | 8 | 10,601 | what English is, the sentence, articles, pronouns, prepositions of place and time, plurals and countability, there/it and possessives |
 | 2 The verb system | 9 | 10,838 | present, past, future, perfect, passive, the twelve tenses, modals, conditionals, clauses |
 | 3 Verbs in full | 7 | 10,055 | -ing against to, participles, phrasal verbs, verbs with a preposition, the -ed ending, auxiliaries, the 415 |
-| 4 Nouns and modifiers | 4 | 5,146 | determiners and quantifiers, adjective order, adverbs, word formation |
+| 4 Nouns and modifiers | 4 | 5,146 | determiners, adjective order, adverbs, word formation |
 | 5 The sentence | 5 | 7,452 | connectors, relative clauses, cleft, ellipsis, inversion and negation, questions |
-| 7 Reading and listening | 2 | 2,534 | how to read, how to listen |
-| 8 Writing and speaking | 1 | 1,547 | how to write |
+| 6 Vocabulary and register | 6 | 8,889 | collocations, verb patterns, word families, formality, false friends, prepositions at scale |
+| 7 Reading and listening | 6 | 8,691 | how to read, how to listen, science prose, reading a paper, poetry, reading speed |
+| 8 Writing and speaking | 6 | 8,388 | how to write, paragraphs, cohesion, hedging, registers, the fourteen errors |
 | 9 Practice | 42 | 149,456 | 5,471 cards from the Anki deck, in printable form |
 | 10 Reference | 6 | 18,217 | the 415-verb table, the six rules, the situation index, the traps, the glossary |
+| 11 Exercises | 10 | 13,823 | exercises for parts 1 to 8, complete answer keys, four self-tests |
+
+The reading extracts the plan budgeted for were not written. Part 7
+teaches the method for reading them instead, which is what it is for; the
+corpus of 109 public-domain works and 15 arXiv papers is collected and
+unused. `PLAN.md` records that as the outstanding item.
 
 Parts 6, and the reading extracts and exercises in 7 and 9, are the work
 still to do. `PLAN.md` holds the budget.
@@ -90,10 +97,12 @@ book/            the source, ordered by [X.Y.Z] frontmatter id
   03-*.mdx       verbs in full
   04-*.mdx       nouns and modifiers
   05-*.mdx       the sentence
+  06-*.mdx       vocabulary and register
   07-*.mdx       reading and listening
   08-*.mdx       writing and speaking
   09-*.mdx       practice, generated from the Anki deck
   10-*.mdx       reference, generated from the dataset
+  11-*.mdx       exercises, answer keys and self-tests
 tools/
   check.py       pre-build checks: ids, tags, anchors, frontmatter
   check_english.py  fails the build on non-English content
@@ -145,7 +154,7 @@ it allows IPA, which is pronunciation and therefore part of the subject.
 name rather than adding or removing a block, and drops a closing tag that
 has no opening one.
 
-Both checkers report 0 problems on 84 documents.
+Both checkers report 0 problems on 113 documents.
 
 `pretty-converter` audits every render for overflow, low-contrast text,
 broken anchors and unloaded fonts. One warning remains, and it is expected:

@@ -4,6 +4,10 @@ Target: 1,000+ pages at 6x9in, English only, built with
 `pretty-converter`. Every document is `[X.Y.Z]` frontmatter so the tool
 orders it, and every page must be worth reading.
 
+**Status: met.** 1,126 pages, 113 documents, 0 build errors, 0 build
+warnings from the source. The one remaining audit warning is documented in
+`go-pretty-converter.yml`.
+
 ## Why this shape
 
 The material already collected decides the structure. There is no point
@@ -25,41 +29,88 @@ half is written so it can teach.
 
 ## Parts
 
-| Part | Title | Ch | Content |
+| Part | Title | Ch | Status |
 |---|---|---|---|
-| 0 | Front matter | 4 | how to use this book, the method, setup, levels |
-| 1 | Foundations | 8 | what English is, sentences, nouns, articles, pronouns, plurals, there/it, prepositions |
-| 2 | The verb system | 10 | present, past, future, perfect, modals, conditionals, passive, causative, verb patterns, auxiliaries |
-| 3 | Verbs in full | 8 | the 415, the 6 rules, the decision table, -ing vs to, participles, phrasal verbs, verb + preposition, -ed pronunciation |
-| 4 | Nouns and modifiers | 7 | countability, determiners, prepositions, adjectives, adverbs, word formation, comparison |
-| 5 | The sentence | 8 | clauses, connectors, relative clauses, cleft, ellipsis, inversion, negation, questions |
-| 6 | Vocabulary and register | 6 | collocations, phrasal verbs, word families, formality, register, false friends |
-| 7 | Reading and listening | 6 | how to read, how to listen, the science texts, the papers, poetry, speed |
-| 8 | Writing and speaking | 6 | paragraphs, cohesion, hedging, registers, common errors, the 12-tenses table |
-| 9 | Practice | 10 | exercises per part, flashcards, self-tests, answer keys |
-| 10 | Reference | 8 | full verb table, grammar tables, glossary, irregular index, situation index, answer key |
+| 0 | Front matter | 4 | done: how to use this book, the method, your tools, the levels |
+| 1 | Foundations | 8 | done: what English is, the sentence, articles, pronouns, prepositions of place and time, plurals and countability, there/it and possessives |
+| 2 | The verb system | 10 | done: present, past, future, perfect, passive, the twelve tenses, modals, conditionals, clauses |
+| 3 | Verbs in full | 8 | done: -ing against to, participles, phrasal verbs, verbs with a preposition, the -ed ending, auxiliaries, the 415 |
+| 4 | Nouns and modifiers | 7 | partly: determiners, adjective order, adverbs, word formation. Still missing: comparison in depth, and the countability chapter sits in part 1 where it is needed |
+| 5 | The sentence | 8 | done: connectors, relative clauses, cleft and ellipsis, inversion and negation, questions |
+| 6 | Vocabulary and register | 6 | done: collocations, verb patterns, word families, formality and register, false friends, prepositions at scale |
+| 7 | Reading and listening | 6 | done: how to read, how to listen, science prose, reading a paper, poetry, reading speed |
+| 8 | Writing and speaking | 6 | done: how to write, paragraphs, cohesion, hedging, registers in practice, the fourteen errors |
+| 9 | Practice | 10 | 5,471 flashcards, generated, in printable chapters |
+| 11 | Exercises | 13 | done: exercises for parts 1 to 8, complete answer keys, four self-tests with mark scales |
+| 10 | Reference | 8 | done: verb table, grammar tables, glossary, situation index, answer key |
 
-Estimated 80 documents, 1000 to 1300 pages.
+## Page budget, as built
 
-## Page budget
+| | planned | actual |
+|---|---|---|
+| prose | ~400 pages | ~560 pages, 205,108 words |
+| generated tables | ~80 pages | ~90 pages |
+| flashcards | ~190 pages | ~400 pages, 5,471 cards |
+| exercises and keys | 150 pages | ~60 pages, 4 exercise sets and 5 answer keys |
+| reading extracts | 200 pages | 0 |
 
-- Prose: about 300,000 words, roughly 400 pages
-- Generated tables: verb table, rules, decisions, glossary, 80 pages
-- Flashcards: 5,822 at 30 per page, roughly 190 pages
-- Exercises and answer keys: 150 pages
-- Reading extracts: 200 pages
+The flashcards came in at twice the plan, which is correct: part 0 says
+they are the highest-value part for retention, and the plan already said
+they were not to be trimmed.
 
-The flashcards alone are nearly 200 pages, and they are the single
-highest-value part for retention, so they are not trimmed.
+**The reading extracts were not written.** The plan budgeted 200 pages
+from the 109 public-domain works and the 15 arXiv papers, and both are
+collected and available. What is in part 7 instead is the *method* for
+reading them: how science is written, how to take a paper apart in fifteen
+minutes, how poetry works, how to read faster. The extracts themselves are
+the outstanding item on this plan.
 
 ## Rules for every document
 
 1. **English only.** No native-language scaffolding, not even a word.
+   Enforced by `tools/check_english.py`, which fails the build.
 2. **Every explanation gives an example.** A rule with no example is not
    an explanation.
 3. **The wrong version is shown too.** Learners need to see the mistake
-   to recognise it, and half the errors in this book are from Spanish.
+   to recognise it, and the mistake is shown **in English**, which is what
+   makes it recognisable.
 4. **Generated content is generated.** The verb table, the glossary and
    the indexes come from scripts, so they cannot drift.
 5. **No filler.** If a section cannot say something the learner did not
    already know, it is cut.
+
+## What the checks are for
+
+Each exists because a real mistake got past the earlier ones, and each one
+was written after measuring rather than after assuming.
+
+`tools/check.py` — duplicate ids, unbalanced custom tags, duplicate heading
+anchors. The anchor check is **global**, because the renderer uses one id
+space for the whole book. That was confirmed the hard way: it was relaxed
+to per-file on a reasonable assumption and the build audit reported the
+same heading in two different files within a minute.
+
+`tools/check_english.py` — non-English content. It caught a corrupted line
+in the poetry chapter that I introduced myself.
+
+`tools/fix_tags.py` — rebalances a mismatched tag by rewriting the closing
+name rather than adding or removing a block, and drops a closing tag with
+no opening one.
+
+`tools/report.py` — the figures, shared by `build.sh` and the README, so
+the page count quoted in either cannot drift from the build.
+
+## The one standing warning
+
+`page-break-inside-risk` on `<table>`. The audit wants
+`page-break-inside: avoid` on the table element. The irregular verb table
+is 415 rows and runs for many pages, so a table has to be allowed to
+break; the theme sets `avoid` on the row instead, which is the part that
+matters, because a row split across a page boundary puts the verb at the
+bottom of one page and its past form at the top of the next.
+
+The audit does not read the theme's CSS, so it cannot see the row rule
+that already prevents the problem it describes, and all seventeen built-in
+themes raise the same warning for the same reason. Reasoned out in
+`go-pretty-converter.yml`.
+</content>
