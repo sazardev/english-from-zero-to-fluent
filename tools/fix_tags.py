@@ -30,15 +30,20 @@ def fix(path):
         m = LINE.match(l)
         if m:
             if stack and stack[-1] != m.group("ctag"):
+                # closes the wrong tag: rewrite the name, keep the block
                 out.append(l.replace(f"</{m.group('ctag')}>", f"</{stack[-1]}>"))
                 stack.pop()
                 fixed += 1
-            else:
-                if not stack:
-                    print(f"  {p.name}: stray </{m.group('ctag')}>", file=sys.stderr)
-                else:
-                    stack.pop()
+            elif stack:
+                stack.pop()
                 out.append(l)
+            else:
+                # nothing is open, so this close has no block of its own.
+                # The commonest cause is a section that was rewritten and
+                # kept the old closing tag, and leaving it in makes every
+                # count in the file wrong.
+                print(f"  {p.name}: dropping stray </{m.group('ctag')}>", file=sys.stderr)
+                fixed += 1
             continue
         for t in TAGS:
             if re.search(rf"<{t}>", l):
@@ -51,13 +56,6 @@ def fix(path):
         idx = max((i for i, l in enumerate(out) if l.strip()), default=len(out) - 1)
         for t in reversed(stack):
             out.insert(idx + 1, f"</{t}>")
-            fixed += 1
-    else:
-        # a closing tag left over at the end of the file is a slip in the
-        # other direction, and it is always the last line
-        while out and out[-1].strip() in (f"</{t}>" for t in TAGS):
-            print(f"  {p.name}: dropping leftover {out[-1].strip()}", file=sys.stderr)
-            out.pop()
             fixed += 1
 
     p.write_text("\n".join(out), encoding="utf-8")

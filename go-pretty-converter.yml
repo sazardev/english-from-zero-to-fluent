@@ -17,5 +17,19 @@ author: "English from Zero to Fluent"
 # 6x9 is the trim size print-on-demand services expect.
 paper: 6x9in
 
-# Every build runs the audit. Warnings are advisory unless --strict is
-# passed, so CI passes --strict and a regression fails the job.
+# The build runs an automatic quality audit afterwards. It is advisory and
+# never fails the build, and there is no --strict flag, so a warning count
+# in the log is a thing to read, not a gate.
+#
+# One warning is expected and is not a defect in the source:
+#
+#   [page-break-inside-risk] <code> has no page-break-inside: avoid
+#
+# It is a layout heuristic, not a CSS check. All seventeen built-in themes
+# raise it identically and none of them carries the declaration it claims
+# is missing, and appending the declaration to a custom theme does not
+# silence it, so it cannot be fixed from the stylesheet. It fires or not
+# depending on where a fenced block happens to fall in the rendered page,
+# which is why it appears and disappears as the prose above it changes.
+# The blocks it flags are diagrams, and a diagram that moves to the next
+# page is the correct outcome anyway.

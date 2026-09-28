@@ -62,27 +62,16 @@ for k, v in sorted(slugs.items()):
     if len(v) > 1:
         problems.append(f"duplicate heading slug '{k}': {', '.join(v)}")
 
-# A fenced block of 12 or more lines is flagged by the build audit as a
-# page-break risk, and the audit does not read the theme's CSS, so no
-# amount of styling silences it. At 6x9 a tall block is also simply
-# unreadable. Split the idea into two blocks or draw it shorter.
-LONG_BLOCK = 11
-for f in files:
-    fence, start, n = False, 0, 0
-    for i, l in enumerate(f.read_text(encoding="utf-8").split("\n"), 1):
-        if l.lstrip().startswith("```"):
-            if not fence:
-                fence, start, n = True, i, 0
-            else:
-                if n > LONG_BLOCK:
-                    problems.append(
-                        f"{f.name}:{start} fenced block has {n} lines "
-                        f"(max {LONG_BLOCK}); the build audit flags it as a "
-                        f"page-break risk"
-                    )
-                fence = False
-        elif fence:
-            n += 1
+# pretty-converter's page-break-inside-risk warning was originally blamed
+# on fenced blocks of twelve lines or more, and a limit was written here to
+# catch them. That limit was a coincidence: the same document with one
+# fewer line of prose stopped warning, and a seven-line block warned once
+# the text above it grew. The warning is a layout heuristic about where a
+# block lands in the rendered page, it ignores the theme's CSS, and it
+# fires differently for the same content on a different theme. There is
+# no content rule that predicts it, so a content rule would be a guess.
+# The build audit is advisory and the expectation is recorded in
+# go-pretty-converter.yml instead.
 
 if problems:
     print(f"  {len(problems)} problem(s):")
