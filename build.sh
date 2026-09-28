@@ -30,6 +30,7 @@ ONLY="$(python3 -c "print(','.join([f'{i:02d}' for i in range(1,26)]+['Irregular
 # ------------------------------------------------------------------- checks
 say "Pre-build checks"
 python3 tools/check.py "$BOOK" || die "source problems, not building"
+python3 tools/check_english.py "$BOOK" || die "non-English content, not building"
 
 if [[ ${1:-} == check ]]; then exit 0; fi
 
@@ -54,6 +55,7 @@ fi
 
 say "Re-checking after generation"
 python3 tools/check.py "$BOOK" || die "generation produced problems"
+python3 tools/check_english.py "$BOOK" || die "generation introduced non-English content"
 
 # --------------------------------------------------------------------- build
 say "Analyse"
