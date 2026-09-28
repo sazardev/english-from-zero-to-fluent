@@ -72,6 +72,11 @@ for s, v in sorted(slugs.items()):
         hint = " (rename it after this chapter's subject)" if s in (
             "four-things-learners-get-wrong", "common-mistakes",
             "when-problems-arise", "summary") else ""
+        if re.fullmatch(r"\d+-.+", s) and "answered" not in s:
+            # An answer key repeats the exercise headings on purpose, so
+            # the fix is a marker on the answer side: "## 3. Articles —
+            # answered".
+            hint = " (this looks like an answer key echoing the exercises; add \"— answered\")"
         problems.append(
             f"duplicate heading {s!r}{hint}: {', '.join(v[:6])}"
         )
