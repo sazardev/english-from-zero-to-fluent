@@ -17,6 +17,12 @@ files = sorted(list(SRC.glob("*.md")) + list(SRC.glob("*.mdx")) + list(SRC.glob(
 if not files:
     problems.append("no source documents found")
 
+def slug(h):
+    s = re.sub(r"<[^>]+>", "", h.lower())
+    s = re.sub(r"[^a-z0-9\s-]", "", s)
+    return re.sub(r"\s+", "-", s.strip())
+
+
 ids = collections.defaultdict(list)
 for f in files:
     t = f.read_text(encoding="utf-8")
@@ -45,22 +51,37 @@ for f in files:
     if re.search(r"[ \t]+$", t, re.M):
         problems.append(f"{f.name}: trailing whitespace")
 
-# duplicate heading slugs break the table of contents and every internal
-# link that points at them, and the renderer only reports the first
-def slug(h):
-    s = re.sub(r"<[^>]+>", "", h.lower())
-    s = re.sub(r"[^a-z0-9\s-]", "", s)
-    return re.sub(r"\s+", "-", s.strip())
-
+# Heading slugs become anchor ids. Each MDX file is one document, so an
+# anchor only has to be unique inside its own file, and a duplicate there
+# breaks that file's table of contents and every link pointing at it. This
+# is what the flashcard chapters were doing, with the same sub-deck name
+# eleven times in one file.
+#
+# The h1 is different: it becomes the chapter title in the book's table of
+# contents, so two h1s with the same words would give the contents two
+# identical entries. That is checked across every file.
 slugs = collections.defaultdict(list)
+titles = collections.defaultdict(list)
 for f in files:
     for i, l in enumerate(f.read_text(encoding="utf-8").split("\n"), 1):
         m = re.match(r"^(#{1,6})\s+(.*)$", l)
-        if m:
-            slugs[slug(m.group(2))].append(f"{f.name}:{i}")
-for k, v in sorted(slugs.items()):
+        if not m:
+            continue
+        level, s = len(m.group(1)), slug(m.group(2))
+        if level == 1:
+            titles[s].append(f"{f.name}:{i}")
+        else:
+            slugs[(f.name, s)].append(i)
+for (name, s), v in sorted(slugs.items()):
     if len(v) > 1:
-        problems.append(f"duplicate heading slug '{k}': {', '.join(v)}")
+        problems.append(
+            f"{name}: heading {s!r} used {len(v)} times (lines "
+            f"{', '.join(str(x) for x in v[:6])}); a repeated anchor id breaks "
+            f"this chapter's own contents"
+        )
+for s, v in sorted(titles.items()):
+    if len(v) > 1:
+        problems.append(f"duplicate chapter title {s!r}: {', '.join(v)}")
 
 # pretty-converter's page-break-inside-risk warning was originally blamed
 # on fenced blocks of twelve lines or more, and a limit was written here to
