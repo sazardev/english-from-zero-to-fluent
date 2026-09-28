@@ -1,0 +1,71 @@
+# Custom go-pretty-converter theme.
+# Generated with: pretty-converter theme new academic-print --from academic
+name: academic-print
+description: "Academic, tuned for a 6x9 reference book: keeps tables and code blocks off page breaks"
+extends: academic
+
+colors:
+  primary: ""      # e.g. "#1a56db" - leave empty to inherit from extends
+  accent: ""
+  text: ""
+  muted: ""
+  background: ""
+
+fonts:
+  heading: ""        # e.g. "Georgia, serif"
+  body: ""
+  code: ""
+  google_fonts: []    # only used with --allow-network-fonts, e.g. ["Inter:400,600"]
+
+sections:
+  cover: true
+  toc: true
+  page_numbers: true
+  header: true
+
+density: normal        # compact | normal | relaxed
+
+# Raw CSS appended last — wins over everything above.
+css: |
+  /* The build audit flags a long fenced code block as a page-break risk:
+     at 6x9 a multi-line block can be split across a page boundary, which
+     cuts an ASCII diagram or an example list in half and makes it
+     unreadable. This book's code blocks are diagrams and worked examples,
+     so a block that breaks in the middle is worse than a block that moves
+     to the next page. Both the legacy and the modern property are set
+     because print engines disagree on which one they honour. */
+  pre,
+  pre > code {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* A block too tall for one page has to break somewhere, so it breaks at
+     a line boundary rather than mid-glyph. */
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  code {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  table {
+    page-break-inside: auto;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+

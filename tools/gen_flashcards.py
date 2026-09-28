@@ -175,26 +175,35 @@ def main():
             batches.append(cur)
 
         for bi, batch in enumerate(batches):
-            sub = "" if len(batches) == 1 else f", part {bi+1}"
-            title = top + sub
+            # Every document is a slice of one deck, so the deck name
+            # alone repeats across the slice and across the deck's own
+            # sub-decks. The slice number makes each heading unique, which
+            # the table of contents and every internal link need.
+            part = f", part {bi+1} of {len(batches)}" if len(batches) > 1 else ""
+            title = top + part
+            nav = f"{top} ({bi+1}/{len(batches)})"
             docid = f"{a.part}.{seq}.{bi+1}"
             fname = f"{a.part}-{seq:02d}-{bi+1}-{slug(top)[:40]}.mdx"
             body = [f"# {title}", ""]
             if len(batches) > 1:
                 body.append(f"*Page {bi+1} of {len(batches)} for {top}*")
                 body.append("")
-            # One h2 per document, not per note. Repeating the sub-deck
-            # heading for every note produced duplicate anchor ids, which
-            # breaks the table of contents and every internal link.
-            first = True
+            # Navigation matters for EPUB and Kindle: one MDX file is one
+            # nav entry, so a chapter with no h2 has no in-chapter
+            # navigation. A heading every twenty cards gives the reader
+            # somewhere to jump to. One heading per note would be useless
+            # noise and would repeat the sub-deck name, which breaks the
+            # table of contents, so the deck, the slice and the block
+            # number all go into the heading to keep it unique.
+            n = 0
             for deckname, card in batch:
-                if first:
-                    body.append(f"**From the deck:** {deckname}")
+                if n % 20 == 0:
+                    body.append(f"## {deckname} {nav}, block {n // 20 + 1}")
                     body.append("")
-                    first = False
+                n += 1
                 body.append(card)
                 body.append("")
-            text = (f'---\nid: "[{docid}]"\ntitle: {title}{sub}\n---\n\n'
+            text = (f'---\nid: "[{docid}]"\ntitle: {title}\n---\n\n'
                     + "\n".join(body).rstrip() + "\n")
             w = len(text.split())
             total_words += w

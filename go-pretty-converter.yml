@@ -6,7 +6,7 @@
 
 source: ./book
 out: ./out/english-from-zero-to-fluent
-theme: academic
+theme: academic-print
 language: en
 density: relaxed
 
