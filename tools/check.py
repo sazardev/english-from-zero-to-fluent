@@ -45,6 +45,23 @@ for f in files:
     if re.search(r"[ \t]+$", t, re.M):
         problems.append(f"{f.name}: trailing whitespace")
 
+# duplicate heading slugs break the table of contents and every internal
+# link that points at them, and the renderer only reports the first
+def slug(h):
+    s = re.sub(r"<[^>]+>", "", h.lower())
+    s = re.sub(r"[^a-z0-9\s-]", "", s)
+    return re.sub(r"\s+", "-", s.strip())
+
+slugs = collections.defaultdict(list)
+for f in files:
+    for i, l in enumerate(f.read_text(encoding="utf-8").split("\n"), 1):
+        m = re.match(r"^(#{1,6})\s+(.*)$", l)
+        if m:
+            slugs[slug(m.group(2))].append(f"{f.name}:{i}")
+for k, v in sorted(slugs.items()):
+    if len(v) > 1:
+        problems.append(f"duplicate heading slug '{k}': {', '.join(v)}")
+
 if problems:
     print(f"  {len(problems)} problem(s):")
     for p in problems[:25]:
