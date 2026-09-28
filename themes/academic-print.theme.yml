@@ -27,45 +27,45 @@ density: normal        # compact | normal | relaxed
 
 # Raw CSS appended last — wins over everything above.
 css: |
-  /* The build audit flags a long fenced code block as a page-break risk:
-     at 6x9 a multi-line block can be split across a page boundary, which
-     cuts an ASCII diagram or an example list in half and makes it
-     unreadable. This book's code blocks are diagrams and worked examples,
-     so a block that breaks in the middle is worse than a block that moves
-     to the next page. Both the legacy and the modern property are set
-     because print engines disagree on which one they honour. */
-  pre,
-  pre > code {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  /* A block too tall for one page has to break somewhere, so it breaks at
-     a line boundary rather than mid-glyph. */
-  pre {
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-
-  code {
-    page-break-inside: avoid;
-    break-inside: avoid;
-  }
-
-  table {
-    page-break-inside: auto;
-  }
-
+  /* The rule that matters for a book like this one is on the row, not the
+     table. The irregular verb table is 415 rows and runs across many
+     pages, so a table has to be allowed to break. A single row must not,
+     because a row split across a page boundary is unreadable: the verb
+     ends at the bottom of one page and its past form at the top of the
+     next. */
   tr {
     page-break-inside: avoid;
     break-inside: avoid;
   }
 
+  /* Head and foot rows repeat on every page a long table spans, which is
+     what a reader looking up a verb needs, and it is what the browser
+     does by default once the rule above stops rows from splitting. */
   thead {
     display: table-header-group;
   }
 
   tfoot {
     display: table-footer-group;
+  }
+
+  table {
+    page-break-inside: auto;
+    break-inside: auto;
+  }
+
+  /* An inline code span, and a short fenced block, should move to the next
+     page rather than be cut. A block too tall for one page breaks at a
+     line boundary instead. */
+  code,
+  pre,
+  pre > code {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  pre {
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 

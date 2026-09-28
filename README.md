@@ -1,7 +1,7 @@
 # English: From Zero to Fluent
 
-A complete English course in one volume. **841 pages**, English only, built
-from material that has already been tested.
+A complete English course in one volume. **1,004 pages**, English only,
+built from material that has already been tested.
 
 Built with
 [go-pretty-converter](https://github.com/sazardev/go-pretty-converter),
@@ -13,23 +13,27 @@ Chrome.
 open out/english-from-zero-to-fluent.pdf
 ```
 
+The built book is in the [releases](../../releases), as PDF and EPUB.
+
 ## What is in it
 
-| part | what | pages |
-|---|---|---|
-| 0 Front matter | how to use the book, the method | ~15 |
-| 1 Foundations | what English is, the sentence, word classes, articles, pronouns, prepositions | ~40 |
-| 2 The verb system | the twelve tenses, modals, conditionals, clauses | ~30 |
-| 3 Verbs in full | the 415 irregular, the six rules, participles, phrasal verbs | ~25 |
-| 4 Nouns and modifiers | countability, determiners, word formation | ~20 |
-| 5 The sentence | clauses, connectors, inversion, ellipsis | ~25 |
-| 6 Vocabulary and register | collocations, word families, formality | ~20 |
-| 7 Reading and listening | how to read, how to listen, the science texts | ~25 |
-| 8 Writing and speaking | how to write, paragraphs, cohesion, registers | ~25 |
-| 9 Practice | 5,471 cards from the Anki deck, in printable form | ~400 |
-| 10 Reference | full verb table, glossary, situation index, traps | ~60 |
+84 documents, 178,067 words in the rendered PDF.
 
-Roughly 175,000 words across 60 documents.
+| part | documents | words | what |
+|---|---|---|---|
+| 0 Front matter | 2 | 2,036 | how to use the book, the method |
+| 1 Foundations | 6 | 7,586 | what English is, the sentence, articles, pronouns, prepositions of place and time |
+| 2 The verb system | 9 | 10,838 | present, past, future, perfect, passive, the twelve tenses, modals, conditionals, clauses |
+| 3 Verbs in full | 7 | 10,055 | -ing against to, participles, phrasal verbs, verbs with a preposition, the -ed ending, auxiliaries, the 415 |
+| 4 Nouns and modifiers | 4 | 5,146 | determiners and quantifiers, adjective order, adverbs, word formation |
+| 5 The sentence | 5 | 7,452 | connectors, relative clauses, cleft, ellipsis, inversion and negation, questions |
+| 7 Reading and listening | 2 | 2,534 | how to read, how to listen |
+| 8 Writing and speaking | 1 | 1,547 | how to write |
+| 9 Practice | 42 | 149,456 | 5,471 cards from the Anki deck, in printable form |
+| 10 Reference | 6 | 18,217 | the 415-verb table, the six rules, the situation index, the traps, the glossary |
+
+Parts 6, and the reading extracts and exercises in 7 and 9, are the work
+still to do. `PLAN.md` holds the budget.
 
 ## Where the material comes from
 
@@ -50,13 +54,17 @@ disagree.
 
 ## Three decisions that shape the book
 
-<Warning>
-
 ### No translations, not once
 
-Every page is in English. If each page were translated you would read
-Spanish all day and acquire Spanish. Hard words are defined in English
+Every page is in English. If each page were translated you would read your
+own language all day and acquire it. Hard words are defined in English
 using simpler words, which is a technique rather than a compromise.
+
+Four chapters broke this while they were being written, each one showing a
+foreign sentence to make a point about interference. Every one was replaced
+with the wrong *English*, which is what the rule asks for anyway: show the
+mistake so the learner recognises it. `tools/check_english.py` now fails the
+build on it.
 
 ### The reference half is generated
 
@@ -72,26 +80,31 @@ grammar knowledge does not turn into ability on its own. Part 7 is about
 input and part 8 is about output, and they are longer than the grammar
 reference.
 
-</Warning>
-
 ## Layout
 
 ```
 book/            the source, ordered by [X.Y.Z] frontmatter id
   00-*.mdx       front matter, written by hand
-  01-*.mdx       foundations, written by hand
-  02-*.mdx       the verb system, some generated
+  01-*.mdx       foundations
+  02-*.mdx       the verb system
+  03-*.mdx       verbs in full
   04-*.mdx       nouns and modifiers
+  05-*.mdx       the sentence
   07-*.mdx       reading and listening
   08-*.mdx       writing and speaking
   09-*.mdx       practice, generated from the Anki deck
   10-*.mdx       reference, generated from the dataset
 tools/
-  check.py       pre-build checks: duplicate ids, unbalanced tags
+  check.py       pre-build checks: ids, tags, anchors, frontmatter
+  check_english.py  fails the build on non-English content
+  fix_tags.py    rebalances a mismatched custom block tag
   gen_grammar.py the twelve tenses, modals, conditionals, clauses, determiners
   gen_reference.py  the verb table, six rules, decisions, situations, traps, glossary
   gen_flashcards.py the Anki deck as printable chapters
-  verify.py      build and report pages, words and warnings
+  verify.py      build and report
+  report.py      the figures, shared by the build and the README
+themes/
+  academic-print.theme.yml   the academic theme plus the print rules
 build.sh         regenerate everything and ship
 out/             the built PDF and EPUB, not committed
 ```
@@ -104,21 +117,45 @@ repository and then builds. It is idempotent.
 ```bash
 UPSTREAM=../omarchy-english-toolkit ./build.sh    # point at the dataset
 FORMAT=pdf ./build.sh                             # PDF only, skips EPUB
+THEME=latex ./build.sh                            # override the config theme
 ./build.sh fast                                   # no header, page numbers or outline
 ./build.sh check                                  # checks only, no render
 ```
 
-The EPUB is 222 kB and needs neither Chrome nor Calibre. The PDF uses
+The theme comes from `go-pretty-converter.yml` unless `THEME` is set in the
+environment. The EPUB needs neither Chrome nor Calibre; the PDF uses
 headless Chrome, which `pretty-converter` downloads on first render.
 
 ## Quality
 
+Three checks run before every build, and each one exists because a real
+mistake got past the earlier ones.
+
+`tools/check.py` finds duplicate ids, unbalanced `<Warning>` and
+`<DeepDive>` tags, trailing whitespace, and heading anchors that collide.
+The anchor check is global because the renderer uses one id space for the
+whole book, which the build audit confirmed when it reported the same
+heading in two different files.
+
+`tools/check_english.py` fails the build on non-English content. It ignores
+tables and fenced blocks, where a form in another script is deliberate, and
+it allows IPA, which is pronunciation and therefore part of the subject.
+
+`tools/fix_tags.py` rebalances a mismatched tag by rewriting the closing
+name rather than adding or removing a block, and drops a closing tag that
+has no opening one.
+
+Both checkers report 0 problems on 84 documents.
+
 `pretty-converter` audits every render for overflow, low-contrast text,
-broken anchors and unloaded fonts. Two warnings appear in the current
-build and both are the theme's CSS rather than the content: the
-`academic` theme does not set `page-break-inside: avoid` on `<code>`, and
-a fenced code block in the method diagram can therefore be split across a
-page. `tools/check.py` reports 0 problems on 60 documents.
+broken anchors and unloaded fonts. One warning remains, and it is expected:
+`page-break-inside-risk` on `<table>`. The advice is wrong for this book.
+The irregular verb table is 415 rows and runs across many pages, so a table
+has to be allowed to break; the theme sets `avoid` on the row instead,
+which is the part that matters, because a row split across a page boundary
+is unreadable. The audit checks the table element, does not read the theme's
+CSS, and raises the same warning for all seventeen built-in themes. The
+reasoning is written out in `go-pretty-converter.yml`.
 
 ## Licence
 
@@ -127,3 +164,5 @@ MIT. See [LICENSE](LICENSE).
 The verbs come from Wiktionary (CC BY-SA) and the meanings from Princeton
 WordNet (WordNet License). Both are attributed in
 `tools/gen_reference.py` and in the book itself.
+</content>
+</invoke>

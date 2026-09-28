@@ -15,21 +15,27 @@ subtitle: "A complete, planned course in one volume"
 author: "English from Zero to Fluent"
 
 # 6x9 is the trim size print-on-demand services expect.
+# The book is written to a 1000-page target; see PLAN.md for the budget.
 paper: 6x9in
 
 # The build runs an automatic quality audit afterwards. It is advisory and
 # never fails the build, and there is no --strict flag, so a warning count
 # in the log is a thing to read, not a gate.
 #
-# One warning is expected and is not a defect in the source:
+# One warning is expected, and with this theme it is
 #
-#   [page-break-inside-risk] <code> has no page-break-inside: avoid
+#   [page-break-inside-risk] <table> has no page-break-inside: avoid and may
+#   be split across pages mid-row
 #
-# It is a layout heuristic, not a CSS check. All seventeen built-in themes
-# raise it identically and none of them carries the declaration it claims
-# is missing, and appending the declaration to a custom theme does not
-# silence it, so it cannot be fixed from the stylesheet. It fires or not
-# depending on where a fenced block happens to fall in the rendered page,
-# which is why it appears and disappears as the prose above it changes.
-# The blocks it flags are diagrams, and a diagram that moves to the next
-# page is the correct outcome anyway.
+# The advice is wrong for this book. The full irregular verb table is 415
+# rows and runs for many pages, so page-break-inside: avoid on a table would
+# mean refusing to render it. The theme sets table to auto and sets avoid on
+# the row instead, which is the part that actually matters: a single row
+# never splits across a page boundary. The audit checks the table element
+# and reports the missing declaration, and it does not read the theme's CSS
+# to notice that the row rule is already there. All seventeen built-in
+# themes carry the same warning for the same reason.
+#
+# The count of these warnings is not stable, because the audit is measuring
+# where a block lands in the rendered page. It appears and disappears as the
+# prose above it changes length. It is not a signal about the source.

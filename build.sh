@@ -17,7 +17,9 @@ UPSTREAM="${UPSTREAM:-$HOME/Work/omarchy-english-toolkit}"
 VERBS="$UPSTREAM/docs/data/verbs.json"
 DECK="${ANKI_COLLECTION:-$HOME/.local/share/Anki2/User 1/collection.anki2}"
 FORMAT="${FORMAT:-pdf,epub}"
-THEME="${THEME:-academic}"
+# Empty means: take the theme from go-pretty-converter.yml. Hardcoding it here
+# silently overrode the config, so the custom theme was never actually used.
+THEME="${THEME:-}"
 OUT="${OUT:-out/english-from-zero-to-fluent}"
 
 say() { printf '\n\033[1;36m==> %s\033[0m\n' "$*"; }
@@ -62,35 +64,24 @@ say "Analyse"
 pretty-converter analyze --source "$BOOK" | tail -6
 
 mkdir -p "$(dirname "$OUT")"
-say "Building: $FORMAT, theme $THEME"
+say "Building: $FORMAT, theme ${THEME:-from go-pretty-converter.yml}"
 FAST=""
 [[ ${1:-} == fast ]] && FAST="--fast"
+# shellcheck disable=SC2086
+THEME_ARG=()
+[[ -n $THEME ]] && THEME_ARG=(--theme "$THEME")
 # shellcheck disable=SC2086
 pretty-converter build \
   --source "$BOOK" \
   --out "$OUT" \
-  --theme "$THEME" \
+  "${THEME_ARG[@]}" \
   --format "$FORMAT" \
   --title "English: From Zero to Fluent" \
   --subtitle "A complete, planned course in one volume" \
   $FAST
 
 say "Result"
-python3 - "$OUT" <<'PY'
-import re, sys
-from pathlib import Path
-base = sys.argv[1]
-for ext in (".pdf", ".epub"):
-    p = Path(base + ext)
-    if not p.exists():
-        continue
-    size = f"{p.stat().st_size/1024/1024:.1f} MB"
-    if ext == ".pdf":
-        pages = [int(x) for x in re.findall(rb"/Count (\d+)", p.read_bytes())]
-        print(f"  {p.name}  {max(pages) if pages else '?'} pages  {size}")
-    else:
-        print(f"  {p.name}  {size}")
-PY
+python3 tools/report.py "$OUT"
 
 say "Done"
 echo "  open:  $OUT.pdf"
