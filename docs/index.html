@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Complete English Course — From Zero to Fluent, free and open source</title>
+<meta name="description" content="A complete, free, open-source English course in one volume. 1,258 pages at 6×9in, 212,000 words, 415 irregular verbs, 5,471 flashcards, exercises with full answer keys. PDF and EPUB, MIT licence.">
+<meta name="keywords" content="english, learn english, english course, english grammar, free ebook, open textbook, irregular verbs, english flashcards, cefr, self-study, pdf, epub, mit licence">
+<meta property="og:type" content="book">
+<meta property="og:title" content="The Complete English Course">
+<meta property="og:description" content="From Zero to Fluent — grammar, reading, writing and 5,471 flashcards in one volume. Free, open source, MIT licence.">
+<meta property="og:image" content="https://sazardev.github.io/english-from-zero-to-fluent/cover.png">
+<meta property="og:url" content="https://sazardev.github.io/english-from-zero-to-fluent/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://sazardev.github.io/english-from-zero-to-fluent/">
+<link rel="alternate" type="application/pdf" title="The Complete English Course (PDF, 6x9in)" href="https://github.com/sazardev/english-from-zero-to-fluent/releases/latest/download/english-from-zero-to-fluent.pdf">
+<link rel="alternate" type="application/epub+zip" title="The Complete English Course (EPUB)" href="https://github.com/sazardev/english-from-zero-to-fluent/releases/latest/download/english-from-zero-to-fluent.epub">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%231d4a6e'/%3E%3Ctext x='50' y='68' font-size='54' font-family='Georgia,serif' fill='%23e8b04b' text-anchor='middle'%3EE%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --ink: #14212e;
+  --ink-soft: #4a5b6b;
+  --navy: #16324f;
+  --navy-mid: #1d4a6e;
+  --gold: #c8901f;
+  --gold-light: #e8b04b;
+  --paper: #fbfaf7;
+  --line: #e2ddd3;
+  --maxw: 1080px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.65;
+  font-size: 18px;
+}
+a { color: var(--navy-mid); }
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+/* ---------- masthead ---------- */
+header {
+  background: linear-gradient(180deg, var(--navy) 0%, var(--navy-mid) 100%);
+  color: #fff;
+  padding: 72px 0 64px;
+  text-align: center;
+  border-bottom: 5px solid var(--gold);
+}
+.eyebrow {
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 13px; letter-spacing: 3.5px; text-transform: uppercase;
+  color: var(--gold-light); margin: 0 0 22px;
+}
+h1 {
+  font-size: clamp(34px, 6vw, 58px); line-height: 1.08; margin: 0 0 18px;
+  font-weight: 700; letter-spacing: -0.5px;
+}
+.sub { font-size: clamp(18px, 2.4vw, 24px); color: #cfe3f2; margin: 0 auto 34px; max-width: 22em; }
+.rule { width: 220px; height: 3px; background: var(--gold); margin: 0 auto 30px; border: 0; }
+.cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin: 0 0 14px; }
+.btn {
+  display: inline-block; padding: 15px 30px; border-radius: 6px;
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 17px; font-weight: 600; text-decoration: none;
+  border: 2px solid transparent; transition: transform .12s ease, box-shadow .12s ease;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.22); }
+.btn-primary { background: var(--gold); color: #14212e; }
+.btn-ghost { border-color: rgba(255,255,255,.55); color: #fff; }
+.note { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 13.5px; color: #a8c4da; margin: 0; }
+
+/* ---------- numbers ---------- */
+.numbers { background: #fff; border-bottom: 1px solid var(--line); padding: 44px 0; }
+.numbers .wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 22px; text-align: center; }
+.num { font-size: clamp(30px, 4.5vw, 44px); font-weight: 700; color: var(--gold); line-height: 1; margin: 0 0 8px; }
+.num-label {
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12.5px;
+  letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink-soft);
+}
+
+/* ---------- sections ---------- */
+section { padding: 62px 0; }
+section:nth-of-type(even) { background: #fff; }
+h2 { font-size: clamp(26px, 3.4vw, 36px); margin: 0 0 10px; letter-spacing: -0.3px; }
+.kicker {
+  font-family: ui-sans-serif, system-ui, sans-serif; font-size: 13px;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold);
+  margin: 0 0 8px;
+}
+.lede { font-size: 20px; color: var(--ink-soft); max-width: 40em; margin: 0 0 32px; }
+
+/* ---------- parts grid ---------- */
+.parts { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.part {
+  background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--gold);
+  border-radius: 5px; padding: 20px 22px;
+}
+.part h3 { margin: 0 0 4px; font-size: 19px; }
+.part .meta { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12.5px; color: var(--ink-soft); margin: 0 0 10px; letter-spacing: .3px; }
+.part p { margin: 0; font-size: 15.5px; color: var(--ink-soft); }
+
+/* ---------- steps ---------- */
+.steps { counter-reset: s; display: grid; gap: 18px; }
+.step { display: grid; grid-template-columns: 52px 1fr; gap: 18px; align-items: start; }
+.step::before {
+  counter-increment: s; content: counter(s);
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--navy); color: var(--gold-light);
+  font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 22px;
+  display: grid; place-items: center;
+}
+.step h3 { margin: 4px 0 4px; font-size: 20px; }
+.step p { margin: 0; color: var(--ink-soft); font-size: 16px; }
+
+/* ---------- tables ---------- */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; width: 100%; font-size: 16px; min-width: 460px; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+th { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 12.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-soft); }
+td:first-child { font-weight: 600; white-space: nowrap; }
+
+/* ---------- download ---------- */
+.downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.dl {
+  border: 1px solid var(--line); border-radius: 6px; padding: 24px; background: var(--paper);
+  text-decoration: none; color: inherit; display: block; transition: border-color .12s;
+}
+.dl:hover { border-color: var(--gold); }
+.dl .fmt { font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 2px; color: var(--gold); margin: 0 0 6px; }
+.dl h3 { margin: 0 0 8px; font-size: 20px; }
+.dl p { margin: 0 0 10px; font-size: 15px; color: var(--ink-soft); }
+.dl .go { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; }
+
+/* ---------- faq ---------- */
+details { border-bottom: 1px solid var(--line); padding: 16px 0; }
+summary { cursor: pointer; font-size: 19px; font-weight: 600; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: '＋ '; color: var(--gold); }
+details[open] summary::before { content: '− '; }
+details p { margin: 12px 0 0; color: var(--ink-soft); }
+
+/* ---------- footer ---------- */
+footer { background: var(--navy); color: #a8c4da; padding: 44px 0; font-size: 15px; }
+footer a { color: var(--gold-light); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; }
+code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.9em; background: #f0ece3; padding: 1px 6px; border-radius: 3px; }
+
+@media (max-width: 620px) {
+  body { font-size: 17px; }
+  header { padding: 52px 0 46px; }
+  .step { grid-template-columns: 40px 1fr; gap: 13px; }
+  .step::before { width: 40px; height: 40px; font-size: 18px; }
+}
+@media print {
+  header, .cta, footer { background: #fff; color: #000; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">A2 to C1 · Self-study · Free forever</p>
+    <h1>The Complete<br>English Course</h1>
+    <p class="sub">From Zero to Fluent — grammar, reading, writing and 5,471 flashcards in one volume</p>
+    <hr class="rule">
+    <div class="cta">
+      <a class="btn btn-primary" href="https://github.com/sazardev/english-from-zero-to-fluent/releases/latest/download/english-from-zero-to-fluent.pdf">Download the PDF</a>
+      <a class="btn btn-ghost" href="https://github.com/sazardev/english-from-zero-to-fluent/releases/latest/download/english-from-zero-to-fluent.epub">Download the EPUB</a>
+    </div>
+    <p class="note">1,258 pages · 6×9in print size · EPUB 3 · MIT licence · no account, no email, no payment</p>
+  </div>
+</header>
+
+<div class="numbers">
+  <div class="wrap">
+    <div><p class="num">1,258</p><p class="num-label">Pages</p></div>
+    <div><p class="num">212k</p><p class="num-label">Words</p></div>
+    <div><p class="num">118</p><p class="num-label">Chapters</p></div>
+    <div><p class="num">415</p><p class="num-label">Irregular verbs</p></div>
+    <div><p class="num">5,471</p><p class="num-label">Flashcards</p></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">What it is</p>
+    <h2>A whole English course, not a grammar book with a promise</h2>
+    <p class="lede">Most free English material is one of three things: a
+    grammar reference you cannot learn from, a phrasebook you will forget, or
+    a pile of disconnected exercises. This is all three parts of one course,
+    ordered so that each chapter only asks for what the previous ones taught.</p>
+    <p>The reference half is generated from a verified dataset, so the table
+    of 415 irregular verbs cannot contain a typo. The teaching half is
+    written, so it can explain why. And every chapter ends with the errors it
+    is responsible for, named and counted, because an error you can name is
+    one you will recognise in your own writing.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Contents</p>
+    <h2>Twelve parts, and a route through them</h2>
+    <p class="lede">Read it as a reference in order, or follow the guided
+    track in part 12, which gives you a chapter, a writing task and an
+    exercise for each of 84 days.</p>
+    <div class="parts">
+      <div class="part"><h3>0 · Front matter</h3><p class="meta">4 chapters</p><p>How to use it, the method, your four tools, and what the CEFR levels mean in practice.</p></div>
+      <div class="part"><h3>1 · Foundations</h3><p class="meta">8 chapters</p><p>What English is, the sentence, articles, pronouns, prepositions, plurals and countability.</p></div>
+      <div class="part"><h3>2 · The verb system</h3><p class="meta">9 chapters</p><p>Present, past, future, perfect and passive, then the twelve tenses, modals and conditionals.</p></div>
+      <div class="part"><h3>3 · Verbs in full</h3><p class="meta">7 chapters</p><p>−ing against to, participles, phrasal verbs, verbs with a preposition, the −ed ending, auxiliaries.</p></div>
+      <div class="part"><h3>4 · Modifiers</h3><p class="meta">4 chapters</p><p>Determiners, adjective order, adverbs, and building thousands of words from seventy affixes.</p></div>
+      <div class="part"><h3>5 · The sentence</h3><p class="meta">5 chapters</p><p>Connectors, relative clauses, cleft sentences, ellipsis, inversion, negation and questions.</p></div>
+      <div class="part"><h3>6 · Vocabulary and register</h3><p class="meta">6 chapters</p><p>Collocations, verb patterns, word families, formality, false friends, prepositions at scale.</p></div>
+      <div class="part"><h3>7 · Reading and listening</h3><p class="meta">6 chapters</p><p>How to read, how to listen, how science is written, how to read a paper in fifteen minutes, poetry, speed.</p></div>
+      <div class="part"><h3>8 · Writing and speaking</h3><p class="meta">6 chapters</p><p>Paragraphs, cohesion, hedging, registers, and the fourteen errors that cost the most marks.</p></div>
+      <div class="part"><h3>9 · Practice</h3><p class="meta">25 chapters</p><p>All 5,471 flashcards in printable form, from B1 to C2, generated from a linted deck.</p></div>
+      <div class="part"><h3>10 · Reference</h3><p class="meta">6 chapters</p><p>The complete 415-verb table, the six rules, the decision table, 34 situations, 14 traps, glossary.</p></div>
+      <div class="part"><h3>11 · Exercises</h3><p class="meta">10 chapters</p><p>Exercises for parts 1 to 8, complete answer keys, and four timed self-tests with mark scales.</p></div>
+      <div class="part"><h3>12 · The guided track</h3><p class="meta">5 chapters</p><p>A twelve-week programme, your first week hour by hour, worked examples, and a diagnostic.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">How to start</p>
+    <h2>Four steps, and the first one is not the grammar</h2>
+    <div class="steps">
+      <div class="step"><div><h3>Take the diagnostic</h3><p>Part 12.4. Twenty minutes, one paragraph, and it tells you which parts to read. Most people read the wrong chapters first; this saves you about six weeks.</p></div></div>
+      <div class="step"><div><h3>Read the method</h3><p>Part 0, all four chapters. The four skills, how often to practise each, and the one tool everybody skips: the file where you write your own mistakes down.</p></div></div>
+      <div class="step"><div><h3>Follow the programme</h3><p>Part 12.1. Eighty-four days, each with a chapter, a 100-word writing task and an exercise named. Forty minutes a day, and the same four blocks every day.</p></div></div>
+      <div class="step"><div><h3>Keep the deck</h3><p>Part 9. 5,471 cards generated from the same dataset as the verb table. Twenty a day beats two hundred on a Sunday, and that is the whole point of spaced repetition.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Why free, and why open source</p>
+    <h2>Everything here is MIT licensed</h2>
+    <p class="lede">The book, the build, the generators, the theme and this
+    site. Clone it, change it, translate it, print it. If you improve a
+    chapter, the improvement is yours and you do not owe anyone anything.</p>
+    <p>Every reference table is generated from a checked dataset rather than
+    typed, which means a 415-row table of irregular verbs contains no
+    hand-typing errors. The same dataset backs a website, a terminal tool
+    and an Anki deck, so the four versions cannot drift apart.</p>
+    <p>The verb data comes from Wiktionary and Princeton WordNet, and both
+    are attributed inside the book.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Get it</p>
+    <h2>Two formats, no sign-up</h2>
+    <div class="downloads">
+      <a class="dl" href="https://github.com/sazardev/english-from-zero-to-fluent/releases/latest/download/english-from-zero-to-fluent.pdf">
+        <p class="fmt">PDF</p>
+        <h3>For printing and reading</h3>
+        <p>1,258 pages at 6×9in, the trim size print-on-demand services expect. Bookmarked table of contents, tagged for accessibility.</p>
+        <span class="go">Download PDF →</span>
+      </a>
+      <a class="dl" href="https://github.com/sazardev/english-from-zero-to-fluent/releases/latest/download/english-from-zero-to-fluent.epub">
+        <p class="fmt">EPUB</p>
+        <h3>For Kindle and phones</h3>
+        <p>EPUB 3, 415 KB. Reflows to your screen, and every chapter is its own table-of-contents entry.</p>
+        <span class="go">Download EPUB →</span>
+      </a>
+      <a class="dl" href="https://github.com/sazardev/english-from-zero-to-fluent">
+        <p class="fmt">SOURCE</p>
+        <h3>For reading and remixing</h3>
+        <p>Markdown source, build scripts, generators and the custom print theme. One command rebuilds the whole book.</p>
+        <span class="go">Clone the repo →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="kicker">Questions</p>
+    <h2>The things people ask first</h2>
+
+    <details>
+      <summary>Is it really free, with nothing hidden?</summary>
+      <p>Yes. No account, no email, no payment, no link to buy a course at
+      the end. The repository, the PDF, the EPUB and this page are all MIT
+      licensed, which means you can print as many copies as you like.</p>
+    </details>
+
+    <details>
+      <summary>How long does it take to work through?</summary>
+      <p>The guided track is twelve weeks at forty minutes a day, and that
+      is with a diagnostic at the start so you skip the parts you do not
+      need. Most of the people who finish it are working on one specific
+      gap, not learning English from nothing.</p>
+    </details>
+
+    <details>
+      <summary>Am I too advanced or too beginner for this?</summary>
+      <p>It starts at A1 and goes to C1, and the diagnostic in part 12.4
+      routes you to the middle. The flashcard chapters in part 9 go from B1
+      to C2, so there is material at every level.</p>
+    </details>
+
+    <details>
+      <summary>Why 5,471 flashcards in a book?</summary>
+      <p>Because grammar knowledge does not turn into ability on its own.
+      Part 0 argues that grammar explanation is about fifteen per cent of
+      the job. The rest is vocabulary, and the flashcards are the
+      vocabulary.</p>
+    </details>
+
+    <details>
+      <summary>Is the PDF really 6×9in?</summary>
+      <p>Yes, 432×648 points on every page including the cover. It was
+      silently rendering at A4 for several builds because a config key was
+      in the wrong place, and it is now verified on every build by reading
+      the actual page size rather than trusting the config.</p>
+    </details>
+
+    <details>
+      <summary>Can I translate it?</summary>
+      <p>Yes, and you are welcome to. The one rule the book follows
+      internally is that no page mixes in another language, because a reader
+      who switches languages stops reading English. Translating the whole
+      book is fine.</p>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong>The Complete English Course</strong> by Omar Flores · MIT licence<br>
+      Built with <a href="https://github.com/sazardev/go-pretty-converter">go-pretty-converter</a>
+    </div>
+    <div>
+      <a href="https://github.com/sazardev/english-from-zero-to-fluent">Source</a> ·
+      <a href="https://github.com/sazardev/english-from-zero-to-fluent/releases">Releases</a> ·
+      <a href="https://github.com/sazardev/english-from-zero-to-fluent/blob/main/LICENSE">Licence</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
