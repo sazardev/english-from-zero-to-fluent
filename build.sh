@@ -76,9 +76,16 @@ pretty-converter build \
   --out "$OUT" \
   "${THEME_ARG[@]}" \
   --format "$FORMAT" \
-  --title "English: From Zero to Fluent" \
-  --subtitle "A complete, planned course in one volume" \
   $FAST
+
+# The renderer writes only the title, and the cover page it merges in
+# carries a temporary filename instead, so the author, subject and keywords
+# are written here. This also verifies them, which means a build that
+# silently lost the metadata fails loudly.
+if [[ -f $OUT.pdf ]]; then
+  say "Document metadata"
+  python3 tools/metadata.py "$OUT.pdf" | sed 's/^/  /'
+fi
 
 say "Result"
 python3 tools/report.py "$OUT"

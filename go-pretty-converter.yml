@@ -3,20 +3,39 @@
 #
 # Documents are ordered by their [X.Y.Z] frontmatter id, not by filename,
 # so the numbering in the frontmatter is the real table of contents.
+#
+# The nesting matters and it is not obvious. Looking at config.Config, the
+# paper size and the cover image live under `render:`, the spacing lives
+# under `theme_options:`, and the output path is `output`, not `out`. A
+# `paper:` key at the top level is parsed and then ignored, silently, and
+# the book renders at the default A4. That is what happened here for four
+# builds before it was found by reading the actual page size of the PDF
+# rather than trusting this file.
 
 source: ./book
-out: ./out/english-from-zero-to-fluent
+output: ./out/english-from-zero-to-fluent
 theme: academic-print
-language: en
-density: relaxed
 
-title: "English: From Zero to Fluent"
-subtitle: "A complete, planned course in one volume"
-author: "English from Zero to Fluent"
+title: "The Complete English Course"
+subtitle: "From Zero to Fluent — Grammar, Reading, Writing and 5,471 Flashcards in One Volume"
+author: "Omar Flores"
 
-# 6x9 is the trim size print-on-demand services expect.
-# The book is written to a 1000-page target; see PLAN.md for the budget.
-paper: 6x9in
+render:
+  # 6x9in is the trim size print-on-demand services expect, and it is
+  # also exactly 2:3, which is the proportion of cover.svg. The cover is
+  # scaled to the paper, so a cover of a different proportion comes out
+  # stretched.
+  paper: 6x9in
+  # The cover replaces the theme's text cover. It is vector SVG, so it
+  # needs no image tool and no fonts beyond generic families.
+  cover_image: ./cover.svg
+  header_title: "The Complete English Course"
+
+theme_options:
+  # relaxed gives a book you can read for an hour, which is what a course
+  # has to be. Compact saves about a hundred pages and costs a lot of
+  # comfortable reading.
+  density: relaxed
 
 # The build runs an automatic quality audit afterwards. It is advisory and
 # never fails the build, and there is no --strict flag, so a warning count
@@ -39,3 +58,8 @@ paper: 6x9in
 # The count of these warnings is not stable, because the audit is measuring
 # where a block lands in the rendered page. It appears and disappears as the
 # prose above it changes length. It is not a signal about the source.
+#
+# The PDF's document metadata is not set by the renderer. It writes only
+# the title, and Chrome stamps itself as the creator, so the author, the
+# subject and the keywords are written afterwards by tools/metadata.py with
+# qpdf, which is also the tool that verifies them.
