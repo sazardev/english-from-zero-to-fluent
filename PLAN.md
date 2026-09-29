@@ -4,9 +4,16 @@ Target: 1,000+ pages at 6x9in, English only, built with
 `pretty-converter`. Every document is `[X.Y.Z]` frontmatter so the tool
 orders it, and every page must be worth reading.
 
-**Status: met.** 1,126 pages, 113 documents, 0 build errors, 0 build
-warnings from the source. The one remaining audit warning is documented in
-`go-pretty-converter.yml`.
+**Status: met.** 1,258 pages, 118 documents, 6×9in, 0 build errors, 0
+build warnings from the source. The one remaining audit warning is
+documented in `go-pretty-converter.yml`.
+
+Part 12, the guided track, was added last and is the answer to "I do not
+know where to start": a twelve-week programme with a chapter, a writing
+task and an exercise named for each of 84 days, the first week in hours,
+a diagnostic that routes a reader to the right parts, and worked examples
+that build a paragraph through the eight steps in which grammar decisions
+are actually made.
 
 ## Why this shape
 
@@ -42,16 +49,18 @@ half is written so it can teach.
 | 8 | Writing and speaking | 6 | done: how to write, paragraphs, cohesion, hedging, registers in practice, the fourteen errors |
 | 9 | Practice | 10 | 5,471 flashcards, generated, in printable chapters |
 | 11 | Exercises | 13 | done: exercises for parts 1 to 8, complete answer keys, four self-tests with mark scales |
+| 12 | The guided track | 5 | done: how to use the track, the twelve-week programme, the first week hour by hour, worked examples, the diagnostic |
 | 10 | Reference | 8 | done: verb table, grammar tables, glossary, situation index, answer key |
 
 ## Page budget, as built
 
 | | planned | actual |
 |---|---|---|
-| prose | ~400 pages | ~560 pages, 205,108 words |
+| prose | ~400 pages | ~620 pages, 212,132 words |
 | generated tables | ~80 pages | ~90 pages |
 | flashcards | ~190 pages | ~400 pages, 5,471 cards |
-| exercises and keys | 150 pages | ~60 pages, 4 exercise sets and 5 answer keys |
+| exercises and keys | 150 pages | ~75 pages, 4 exercise sets, 5 answer keys, 4 self-tests |
+| guided track | 0 (not planned) | ~35 pages, part 12 |
 | reading extracts | 200 pages | 0 |
 
 The flashcards came in at twice the plan, which is correct: part 0 says
@@ -99,6 +108,34 @@ no opening one.
 
 `tools/report.py` — the figures, shared by `build.sh` and the README, so
 the page count quoted in either cannot drift from the build.
+
+## Three things that were wrong and produced no error
+
+Found by measuring the output rather than reading the configuration, and
+recorded here because each of them is invisible from the source.
+
+**The paper was A4.** `paper` is nested under `render:` in
+go-pretty-converter's config, and a top-level `paper:` key is parsed and
+then ignored without a word. Four builds and a config file claiming 6x9in
+produced a book laid out for A4. The same family of mistake: `density`
+belongs under `theme_options:` and the output path is `output`, not `out`.
+
+**The title was a temporary filename.** The cover page is rendered from an
+HTML fragment in `render/cover.go` that has a charset and no `<title>`, and
+it is merged in first, so the merged document inherited whatever Chrome
+called the file: `go-pretty-converter-561087361.html`. Neither `--title`
+nor `--author` is routed into that fragment, so no flag fixes it.
+`tools/metadata.py` writes the info dictionary with qpdf and verifies it.
+
+**The custom theme was never used.** `build.sh` passed `--theme academic`
+on the command line, which overrides the theme in the config. The custom
+print theme had been committed for three commits and no build had used it.
+
+The common cause is the same in all three: a claim in a file, and no
+process that read the claim and compared it against reality. The process
+that would have caught all three is `tools/report.py`, which now prints the
+page size, and `tools/metadata.py`, which fails the build when the metadata
+is wrong.
 
 ## The one standing warning
 
